@@ -20,7 +20,7 @@ import model.services.DepartmentService;
 public class DepartmentListController implements Initializable {
 
 	private DepartmentService service;
-	
+
 	@FXML
 	private TableView<Department> tableViewDepartment;
 
@@ -32,14 +32,14 @@ public class DepartmentListController implements Initializable {
 
 	@FXML
 	private Button btNew;
-	
+
 	private ObservableList<Department> obsList;
 
 	@FXML
 	public void onBtNewAction() {
 		System.out.println("onBtNewAction");
 	}
-	
+
 	public void setDepartmentService(DepartmentService service) {
 		this.service = service;
 	}
@@ -53,20 +53,20 @@ public class DepartmentListController implements Initializable {
 	private void initializeNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-		
-		//macete para o tebleView acompanhar o tamanho da janela
+
+		// macete para o tebleView acompanhar o tamanho da janela
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewDepartment.prefHeightProperty().bind(stage.heightProperty());
 	}
-	
+
 	public void updateTableView() {
-		if(service == null) {
+		if (service == null) {
 			throw new IllegalStateException("Service was null");
 		}
 		List<Department> list = service.findAll();
 		obsList = FXCollections.observableArrayList(list);
 		tableViewDepartment.setItems(obsList);
-		
+
 	}
 
 }
